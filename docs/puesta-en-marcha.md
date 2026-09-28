@@ -42,7 +42,7 @@ A partir de aquí, cada push a `develop` aplica las migraciones en `relevo-prueb
 ## 4. Vercel
 
 1. Add New → Project → importa el repositorio `relevo`. Vercel detecta Astro solo.
-2. Settings → Git → **Production Branch**: `produccion`.
+2. Settings → **Environments** → **Production** → **Branch Tracking**: cambia la rama a `produccion` y guarda.
 3. Settings → Environment Variables (en el plan gratuito, `develop` y `preproduccion` son despliegues *Preview*; cada variable se puede limitar a una rama):
 
    | Variable | Production | Preview · rama `preproduccion` | Preview · rama `develop` |
