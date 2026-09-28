@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [develop, preproduccion, produccion]
+  pull_request:
+    branches: [develop, preproduccion, produccion]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  app:
+    name: Comprobar, testear y compilar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm run build
+        env:
+          PUBLIC_APP_ENV: develop
+
+  migrations:
+    name: Aplicar migraciones de Supabase
+    needs: app
+    # develop y preproduccion comparten la base de datos de pruebas; produccion tiene la suya.
+    if: >-
+      github.event_name == 'push' &&
+      vars.SUPABASE_MIGRATIONS_ENABLED == 'true' &&
+      (github.ref_name == 'develop' || github.ref_name == 'produccion')
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'produccion' && 'production' || 'staging' }}
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - run: supabase link --project-ref ${{ vars.SUPABASE_PROJECT_REF }}
+      - run: supabase db push
