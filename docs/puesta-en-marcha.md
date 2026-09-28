@@ -8,7 +8,7 @@ Pasos que hay que hacer a mano, una sola vez, con tus cuentas. En orden.
 2. En la carpeta del proyecto: `npm install`.
 3. Copia `.env.example` como `.env`.
 4. Instala [Docker Desktop](https://www.docker.com/products/docker-desktop/) y arráncalo. Supabase local corre dentro de Docker.
-5. `npm run db:start`. Al terminar muestra `API URL` y `anon key` (también llamada *publishable key*): cópialas en `.env` como `PUBLIC_SUPABASE_URL` y `PUBLIC_SUPABASE_ANON_KEY`.
+5. `npm run db:start`. Al terminar muestra la `API URL` y la `Publishable key`: cópialas en `.env` como `PUBLIC_SUPABASE_URL` y `PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
 6. `npm run dev` y abre http://localhost:4321. Debe verse la portada de Relevo con la etiqueta «local».
 
 ## 2. GitHub
@@ -28,7 +28,7 @@ El plan gratuito permite 2 proyectos activos, así que `develop` y `preproduccio
 1. Crea dos proyectos en [supabase.com](https://supabase.com), región **Central EU (Frankfurt)**:
    - `relevo-pruebas` (para `develop` y `preproduccion`)
    - `relevo-produccion`
-2. Guarda de cada uno: la contraseña de la base de datos, el *Project ref* (Settings → General), la URL y las claves (Settings → API).
+2. Guarda de cada uno: la contraseña de la base de datos, el *Project ref* (Settings → General), la URL del proyecto, la *Publishable key* (`sb_publishable_…`) y la *Secret key* (`sb_secret_…`), en Settings → API Keys.
 3. En tu cuenta de Supabase → Access Tokens, crea un token para GitHub Actions.
 4. En GitHub → Settings → Environments, crea dos entornos:
    - `staging`: variable `SUPABASE_PROJECT_REF` (ref de `relevo-pruebas`) y secreto `SUPABASE_DB_PASSWORD`.
@@ -50,8 +50,8 @@ A partir de aquí, cada push a `develop` aplica las migraciones en `relevo-prueb
    | `PUBLIC_APP_ENV` | `produccion` | `preproduccion` | `develop` |
    | `PUBLIC_SITE_URL` | URL de producción | URL de preproducción | URL de develop |
    | `PUBLIC_SUPABASE_URL` | de `relevo-produccion` | de `relevo-pruebas` | de `relevo-pruebas` |
-   | `PUBLIC_SUPABASE_ANON_KEY` | de `relevo-produccion` | de `relevo-pruebas` | de `relevo-pruebas` |
-   | `SUPABASE_SERVICE_ROLE_KEY` | de `relevo-produccion` | de `relevo-pruebas` | de `relevo-pruebas` |
+   | `PUBLIC_SUPABASE_PUBLISHABLE_KEY` | de `relevo-produccion` | de `relevo-pruebas` | de `relevo-pruebas` |
+   | `SUPABASE_SECRET_KEY` | de `relevo-produccion` | de `relevo-pruebas` | de `relevo-pruebas` |
 
 4. Opcional: Settings → Domains para dar a cada rama una dirección fija (por ejemplo un subdominio de un dominio tuyo, asignado a la rama `preproduccion`).
 5. Comprueba cada entorno en `/api/health`: debe devolver su `env` y su rama.
