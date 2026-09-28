@@ -1,0 +1,42 @@
+---
+import Base from '@/layouts/Base.astro';
+---
+
+<Base title="Relevo">
+  <main>
+    <p class="eyebrow">Próximamente</p>
+    <h1>Relevo</h1>
+    <p class="lead">Consulta qué días están libres en tu estudio y acuerda cambios de fecha con otros clientes, sin intermediarios.</p>
+  </main>
+</Base>
+
+<style>
+  main {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 96px 20px;
+  }
+
+  .eyebrow {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  h1 {
+    margin: 0 0 16px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(40px, 8vw, 64px);
+    letter-spacing: -0.01em;
+  }
+
+  .lead {
+    margin: 0;
+    font-size: 18px;
+    color: var(--color-ink-soft);
+  }
+</style>

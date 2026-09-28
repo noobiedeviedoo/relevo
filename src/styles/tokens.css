@@ -1,0 +1,60 @@
+/* Tokens de Relevo: los mismos colores y tipografías del lienzo de diseño. */
+:root {
+  --color-ground: #f3efe6;
+  --color-surface: #fffdf8;
+  --color-surface-muted: #eae4d7;
+  --color-line: #dad3c4;
+  --color-line-soft: #e2dbcc;
+  --color-ink: #1c1a16;
+  --color-ink-soft: #3f3b34;
+  --color-muted: #5e5a52;
+
+  --color-accent: #1e5a55;
+  --color-accent-strong: #123d39;
+  --color-accent-soft: #e3efec;
+  --color-mine: #2a7f74;
+
+  --color-slot-free: #a39a87;
+  --color-slot-busy: #2b2823;
+  --color-slot-flexible: #c06a1e;
+  --color-flexible-soft: #f6e6d6;
+  --color-flexible-ink: #8a4513;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Instrument Sans', system-ui, sans-serif;
+
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --tap: 44px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  line-height: 1.45;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-accent-strong);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

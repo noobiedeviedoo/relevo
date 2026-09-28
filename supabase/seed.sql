@@ -1,0 +1,2 @@
+-- Datos ficticios para desarrollo local. Se cargan con `npm run db:reset`.
+-- Se rellenarán en la fase 1 (un estudio, 20 reservas, 5 clientes).

@@ -1,0 +1,53 @@
+---
+import '@/styles/tokens.css';
+import { appEnv, envBadge } from '@/lib/env';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Consulta huecos libres y acuerda cambios de fecha con otros clientes del estudio.' } =
+  Astro.props;
+const badge = envBadge(appEnv);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f3efe6" />
+    {appEnv !== 'produccion' && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    {badge && <div class="env-badge" aria-label={`Entorno ${badge}`}>{badge}</div>}
+    <slot />
+  </body>
+</html>
+
+<style>
+  .env-badge {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    z-index: 100;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--color-flexible-soft);
+    color: var(--color-flexible-ink);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+</style>

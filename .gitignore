@@ -1,0 +1,28 @@
+# Dependencias y compilación
+node_modules/
+dist/
+.astro/
+.vercel/
+.output/
+
+# Variables de entorno (solo se sube .env.example)
+.env
+.env.*
+!.env.example
+
+# Supabase local
+supabase/.branches
+supabase/.temp
+supabase/.env
+
+# Tests
+coverage/
+playwright-report/
+test-results/
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+*.log
